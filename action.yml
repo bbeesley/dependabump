@@ -74,7 +74,7 @@ runs:
         fi
         git config user.email "${{ inputs.commit-author }}@users.noreply.github.com"
         git config user.name "${{ inputs.commit-author }}"
-        git commit -m "${{ inputs.commit-message }}"
-        git push --set-upstream origin "${{ inputs.dependabump-branch }}" --force
+        git commit -m "${{ inputs.commit-message }}" || true
+        git push --set-upstream origin "${{ inputs.dependabump-branch }}" --force || true
         gh pr create --title "${{ inputs.commit-message }}" --body "Automated update of all dependencies" --base "${{ inputs.base-branch }}" --head "${{ inputs.dependabump-branch }}" --label dependencies || true
       shell: bash
