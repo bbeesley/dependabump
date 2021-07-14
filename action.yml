@@ -1,0 +1,80 @@
+name: dependabump
+author: Bill Beesley <bill@beesley.dev>
+description: Simple, automatic, dependency updating
+branding:
+  icon: box
+  color: purple
+inputs:
+  private-npm-token:
+    description: API token for a private npm repository
+    required: false
+  private-npm-domain:
+    description: URL for a private npm repository
+    required: false
+  filter:
+    description: Scope to limit dependency updates by
+    required: false
+  commit-message:
+    description: Commit message for dependabump commits
+    required: true
+    default: 'chore(deps): bump all dependencies'
+  base-branch:
+    description: Base branch for pull requests
+    required: true
+    default: 'main'
+  dependabump-branch:
+    description: Branch to push dependency updates to
+    required: true
+    default: 'dependencies'
+  commit-author:
+    description: github username for commit author
+    required: true
+    default: 'dependabump'
+runs:
+  using: "composite"
+  steps:
+    - name: npm auth
+      run: |
+        if [ "${{ inputs.private-npm-token == '' }}" = 'false' ]; then
+          echo "//${{ inputs.private-npm-domain }}/:_authToken=${{ inputs.private-npm-token }}" >> .npmrc
+          cp .npmrc ~/.npmrc
+        fi
+      shell: bash
+    - name: npm install
+      run: |
+        npm ci
+        if [ -e lerna.json ]; then
+          npx lerna bootstrap
+        fi
+      shell: bash
+    - name: bump dependencies
+      run: |
+        npx npm-check-updates -u --filter "${{ inputs.filter }}"
+        if [ -e lerna.json ]; then
+          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --filter "${{ inputs.filter }}"
+        fi
+      shell: bash
+    - name: update package locks
+      run: |
+        rm -rf node_modules package-lock.json
+        npm i
+        if [ -e lerna.json ]; then
+          npx lerna clean -y
+          rm packages/*/package-lock.json
+          npx lerna bootstrap --no-ci
+        fi
+      shell: bash
+    - name: add, commit, push, pr
+      run: |
+        git checkout -b "${{ inputs.dependabump-branch }}"
+        git status
+        git add package.json package-lock.json
+        if [ -e lerna.json ]; then
+          git add packages/*/package.json packages/*/package-lock.json
+        fi
+        git config user.email "${{ inputs.commit-author }}@users.noreply.github.com"
+        git config user.name "${{ inputs.commit-author }}"
+        git commit -m "${{ inputs.commit-message }}"
+        git push --set-upstream origin "${{ inputs.dependabump-branch }}" --force
+        gh pr create --title "${{ inputs.commit-message }}" --body "Automated update of all dependencies" --base "${{ inputs.base-branch }}" --head "${{ inputs.dependabump-branch }}" --label dependencies || true
+      shell: bash
