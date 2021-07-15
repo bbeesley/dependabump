@@ -30,11 +30,17 @@ inputs:
     description: github username for commit author
     required: true
     default: 'dependabump'
+  working-dir:
+    description: optional path to your npm package.json (if not in repo root)
+    required: false
 runs:
   using: "composite"
   steps:
     - name: npm auth
       run: |
+        if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
+          cd "${{ inputs.working-dir }}"
+        fi
         if [ "${{ inputs.private-npm-token == '' }}" = 'false' ]; then
           echo "//${{ inputs.private-npm-domain }}/:_authToken=${{ inputs.private-npm-token }}" >> .npmrc
           cp .npmrc ~/.npmrc
@@ -42,6 +48,9 @@ runs:
       shell: bash
     - name: npm install
       run: |
+        if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
+          cd "${{ inputs.working-dir }}"
+        fi
         npm ci
         if [ -e lerna.json ]; then
           npx lerna bootstrap
@@ -49,6 +58,9 @@ runs:
       shell: bash
     - name: bump dependencies
       run: |
+        if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
+          cd "${{ inputs.working-dir }}"
+        fi
         npx npm-check-updates -u --filter "${{ inputs.filter }}"
         if [ -e lerna.json ]; then
           npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --filter "${{ inputs.filter }}"
@@ -56,6 +68,9 @@ runs:
       shell: bash
     - name: update package locks
       run: |
+        if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
+          cd "${{ inputs.working-dir }}"
+        fi
         rm -rf node_modules package-lock.json
         npm i
         if [ -e lerna.json ]; then

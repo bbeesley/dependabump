@@ -22,6 +22,7 @@ This is a single workflow step to perform the following tasks without lots of bo
 |  base-branch         | Base branch for pull requests                     | true     | 'main'                               |
 |  dependabump-branch  | Branch to push dependency updates to              | true     | 'dependencies'                       |
 |  commit-author       | github username for commit author                 | true     | 'dependabump'                        |
+|  working-dir         | optional path to your npm package.json            | false    |                                      |
 
 ## Required Environment Variables
 
@@ -54,4 +55,5 @@ jobs:
           dependabump-branch: dependabump # source branch to create PRs from
           commit-author: my-github-bot # github user to associate commits to
           commit-message: 'chore(deps): update ALL the things!' # commit message to use for dependency update commits
+          working-dir: code/package # path to the directory your package.json is in, if not in repo root
 ```
