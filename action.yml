@@ -81,6 +81,9 @@ runs:
       shell: bash
     - name: add, commit, push, pr
       run: |
+        if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
+          cd "${{ inputs.working-dir }}"
+        fi
         git checkout -b "${{ inputs.dependabump-branch }}"
         git status
         git add package.json package-lock.json
