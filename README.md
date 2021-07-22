@@ -13,16 +13,17 @@ This is a single workflow step to perform the following tasks without lots of bo
 
 ## Options
 
-| name                 | description                                       | required | default                              |
-|----------------------|---------------------------------------------------|----------|--------------------------------------|
-|  private-npm-token   | API token for a private npm repository            | false    |                                      |
-|  private-npm-domain  | URL for a private npm repository                  | false    |                                      |
-|  filter              | Scope to limit dependency updates by              | false    |                                      |
-|  commit-message      | Commit message for dependabump commits            | true     | 'chore(deps): bump all dependencies' |
-|  base-branch         | Base branch for pull requests                     | true     | 'main'                               |
-|  dependabump-branch  | Branch to push dependency updates to              | true     | 'dependencies'                       |
-|  commit-author       | github username for commit author                 | true     | 'dependabump'                        |
-|  working-dir         | optional path to your npm package.json            | false    |                                      |
+| name                       | description                                       | required | default                              |
+|----------------------------|---------------------------------------------------|----------|--------------------------------------|
+|  private-npm-token         | API token for a private npm repository            | false    |                                      |
+|  private-npm-domain        | URL for a private npm repository                  | false    |                                      |
+|  filter                    | Scope to limit dependency updates by              | false    |                                      |
+|  commit-message            | Commit message for dependabump commits            | true     | 'chore(deps): bump all dependencies' |
+|  base-branch               | Base branch for pull requests                     | true     | 'main'                               |
+|  dependabump-branch        | Branch to push dependency updates to              | true     | 'dependencies'                       |
+|  dependabump-major-branch  | Branch to push major dependency updates to        | true     | 'major-dependencies'                 |
+|  commit-author             | github username for commit author                 | true     | 'dependabump'                        |
+|  working-dir               | optional path to your npm package.json            | false    |                                      |
 
 ## Required Environment Variables
 
@@ -52,7 +53,8 @@ jobs:
           private-npm-domain: npm.beesley.dev # domain name for private npm registry (if used)
           filter: '@bbeesley/*' # scope to limit module updates by, possible updates are matched against this pattern
           base-branch: master # target branch to create PRs against
-          dependabump-branch: dependabump # source branch to create PRs from
+          dependabump-branch: dependabump # branch to push dependency updates to
+          dependabump-major-branch: major-deps # branch to push major dependency updates to
           commit-author: my-github-bot # github user to associate commits to
           commit-message: 'chore(deps): update ALL the things!' # commit message to use for dependency update commits
           working-dir: code/package # path to the directory your package.json is in, if not in repo root
