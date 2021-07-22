@@ -104,6 +104,7 @@ runs:
       shell: bash
     - name: bump major dependencies
       run: |
+        git checkout "${{ inputs.base-branch }}"
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
           cd "${{ inputs.working-dir }}"
         fi
