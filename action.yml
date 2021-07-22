@@ -26,6 +26,10 @@ inputs:
     description: Branch to push dependency updates to
     required: true
     default: 'dependencies'
+  dependabump-major-branch:
+    description: Branch to push major dependency updates to
+    required: true
+    default: 'major-dependencies'
   commit-author:
     description: github username for commit author
     required: true
@@ -56,17 +60,17 @@ runs:
           npx lerna bootstrap
         fi
       shell: bash
-    - name: bump dependencies
+    - name: bump minor & patch dependencies
       run: |
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
           cd "${{ inputs.working-dir }}"
         fi
         npx npm-check-updates -u --filter "${{ inputs.filter }}"
         if [ -e lerna.json ]; then
-          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --filter "${{ inputs.filter }}"
+          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --target minor --filter "${{ inputs.filter }}"
         fi
       shell: bash
-    - name: update package locks
+    - name: minor - update package locks
       run: |
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
           cd "${{ inputs.working-dir }}"
@@ -79,20 +83,67 @@ runs:
           npx lerna bootstrap --no-ci
         fi
       shell: bash
-    - name: add, commit, push, pr
+    - name: minor - add, commit, push, pr
+      run: |
+        if [ -n "$(git status --porcelain | grep 'package.*json')" ]; then
+          if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
+            cd "${{ inputs.working-dir }}"
+          fi
+          git checkout -b "${{ inputs.dependabump-branch }}"
+          git status
+          git add package.json package-lock.json
+          if [ -e lerna.json ]; then
+            git add packages/*/package.json packages/*/package-lock.json
+          fi
+          git config user.email "${{ inputs.commit-author }}@users.noreply.github.com"
+          git config user.name "${{ inputs.commit-author }}"
+          git commit -m "${{ inputs.commit-message }}" || true
+          git push --set-upstream origin "${{ inputs.dependabump-branch }}" --force || true
+          gh pr create --title "${{ inputs.commit-message }}" --body "Automated update of minor & patch dependencies" --base "${{ inputs.base-branch }}" --head "${{ inputs.dependabump-branch }}" --label dependencies || true
+        fi
+      shell: bash
+    - name: bump major dependencies
       run: |
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
           cd "${{ inputs.working-dir }}"
         fi
-        git checkout -b "${{ inputs.dependabump-branch }}"
-        git status
-        git add package.json package-lock.json
+        npx npm-check-updates -u --filter "${{ inputs.filter }}"
         if [ -e lerna.json ]; then
-          git add packages/*/package.json packages/*/package-lock.json
+          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --filter "${{ inputs.filter }}"
         fi
-        git config user.email "${{ inputs.commit-author }}@users.noreply.github.com"
-        git config user.name "${{ inputs.commit-author }}"
-        git commit -m "${{ inputs.commit-message }}" || true
-        git push --set-upstream origin "${{ inputs.dependabump-branch }}" --force || true
-        gh pr create --title "${{ inputs.commit-message }}" --body "Automated update of all dependencies" --base "${{ inputs.base-branch }}" --head "${{ inputs.dependabump-branch }}" --label dependencies || true
+      shell: bash
+    - name: major - update package locks
+      run: |
+        if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
+          cd "${{ inputs.working-dir }}"
+        fi
+        rm -rf node_modules package-lock.json
+        npm i
+        if [ -e lerna.json ]; then
+          npx lerna clean -y
+          rm packages/*/package-lock.json
+          npx lerna bootstrap --no-ci
+        fi
+      shell: bash
+    - name: major - add, commit, push, pr
+      run: |
+        if [ -n "$(git status --porcelain | grep 'package.*json')" ]; then
+
+          if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
+            cd "${{ inputs.working-dir }}"
+          fi
+          git checkout -b "${{ inputs.dependabump-major-branch }}"
+          git status
+          git add package.json package-lock.json
+          if [ -e lerna.json ]; then
+            git add packages/*/package.json packages/*/package-lock.json
+          fi
+          git config user.email "${{ inputs.commit-author }}@users.noreply.github.com"
+          git config user.name "${{ inputs.commit-author }}"
+          git commit -m "${{ inputs.commit-message }}" -m '
+
+          BREAKING CHANGE: major dependencies updated' || true
+          git push --set-upstream origin "${{ inputs.dependabump-major-branch }}" --force || true
+          gh pr create --title "${{ inputs.commit-message }} - major changes" --body "Automated update of major dependencies" --base "${{ inputs.base-branch }}" --head "${{ inputs.dependabump-major-branch }}" --label dependencies || true
+        fi
       shell: bash
