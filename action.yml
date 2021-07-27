@@ -104,7 +104,6 @@ runs:
       shell: bash
     - name: bump major dependencies
       run: |
-        git checkout "${{ inputs.base-branch }}"
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
           cd "${{ inputs.working-dir }}"
         fi
@@ -115,15 +114,20 @@ runs:
       shell: bash
     - name: major - update package locks
       run: |
-        if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
-          cd "${{ inputs.working-dir }}"
-        fi
-        rm -rf node_modules package-lock.json
-        npm i
-        if [ -e lerna.json ]; then
-          npx lerna clean -y
-          rm packages/*/package-lock.json
-          npx lerna bootstrap --no-ci
+        if [ -n "$(git status --porcelain | grep 'package.*json')" ]; then
+          git stash
+          git checkout "${{ inputs.base-branch }}"
+          if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
+            cd "${{ inputs.working-dir }}"
+          fi
+          git stash pop
+          rm -rf node_modules package-lock.json
+          npm i
+          if [ -e lerna.json ]; then
+            npx lerna clean -y
+            rm packages/*/package-lock.json
+            npx lerna bootstrap --no-ci
+          fi
         fi
       shell: bash
     - name: major - add, commit, push, pr
