@@ -75,11 +75,10 @@ runs:
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
           cd "${{ inputs.working-dir }}"
         fi
-        rm -rf node_modules package-lock.json || true
+        rm -rf node_modules || true
         npm i
         if [ -e lerna.json ]; then
           npx lerna clean -y
-          rm packages/*/package-lock.json || true
           npx lerna bootstrap --no-ci
         fi
       shell: bash
@@ -121,11 +120,10 @@ runs:
             cd "${{ inputs.working-dir }}"
           fi
           git stash pop
-          rm -rf node_modules package-lock.json || true
+          rm -rf node_modules || true
           npm i
           if [ -e lerna.json ]; then
             npx lerna clean -y
-            rm packages/*/package-lock.json || true
             npx lerna bootstrap --no-ci
           fi
         fi
