@@ -84,7 +84,7 @@ runs:
       shell: bash
     - name: minor - add, commit, push, pr
       run: |
-        if [ -n "$(git status --porcelain | grep 'package.*json')" ]; then
+        if [ -n "$(git status --porcelain | grep 'package\.json')" ]; then
           if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
             cd "${{ inputs.working-dir }}"
           fi
@@ -113,7 +113,7 @@ runs:
       shell: bash
     - name: major - update package locks
       run: |
-        if [ -n "$(git status --porcelain | grep 'package.*json')" ]; then
+        if [ -n "$(git status --porcelain | grep 'package\.json')" ]; then
           git stash
           git checkout "${{ inputs.base-branch }}"
           if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
@@ -130,7 +130,7 @@ runs:
       shell: bash
     - name: major - add, commit, push, pr
       run: |
-        if [ -n "$(git status --porcelain | grep 'package.*json')" ]; then
+        if [ -n "$(git status --porcelain | grep 'package\.json')" ]; then
 
           if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
             cd "${{ inputs.working-dir }}"
