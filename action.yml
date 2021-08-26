@@ -92,7 +92,11 @@ runs:
           git status
           git add package.json package-lock.json || true
           if [ -e lerna.json ]; then
-            for FILE in $(git status --porcelain | grep -o "\S*package\.json"); do; git add "$FILE"; git add "$(echo $FILE | sed 's|package\.|package-lock.|')""; done
+            for FILE in $(git status --porcelain | grep -o "\S*package\.json")
+            do
+              git add "$FILE"
+              git add "$(echo $FILE | sed 's|package\.|package-lock.|')" || true
+            done
           fi
           git config user.email "${{ inputs.commit-author }}@users.noreply.github.com"
           git config user.name "${{ inputs.commit-author }}"
@@ -139,7 +143,11 @@ runs:
           git status
           git add package.json package-lock.json || true
           if [ -e lerna.json ]; then
-            for FILE in $(git status --porcelain | grep -o "\S*package\.json"); do; git add "$FILE"; git add "$(echo $FILE | sed 's|package\.|package-lock.|')"; done
+            for FILE in $(git status --porcelain | grep -o "\S*package\.json")
+            do
+              git add "$FILE"
+              git add "$(echo $FILE | sed 's|package\.|package-lock.|')" || true
+            done
           fi
           git config user.email "${{ inputs.commit-author }}@users.noreply.github.com"
           git config user.name "${{ inputs.commit-author }}"
