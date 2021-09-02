@@ -57,7 +57,7 @@ runs:
         fi
         npm ci
         if [ -e lerna.json ]; then
-          npx lerna bootstrap
+          npx lerna bootstrap --ci
         fi
       shell: bash
     - name: bump minor & patch dependencies
