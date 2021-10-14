@@ -32,3 +32,21 @@ jobs:
         run: npm ci
       - name: commitlint
         run: ./node_modules/.bin/commitlint --from HEAD~${{ github.event.pull_request.commits }} --to HEAD
+  validate-actions:
+    runs-on: ubuntu-latest
+    if: ${{ (github.actor == 'dependabot[bot]' && github.event_name == 'pull_request_target') || (github.ref != 'refs/heads/main' && github.event_name == 'push') }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v2
+        if: github.event_name == 'push'
+      - uses: actions/checkout@v2
+        if: github.event_name == 'pull_request_target'
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: nwisbeta/validate-yaml-schema@v1.0.3
+        with:
+          yamlSchemasJson: |
+            {
+                "http://json.schemastore.org/github-action": ["action.yml"],
+                "http://json.schemastore.org/github-workflow": [".github/workflows/*.yml"]
+            }
