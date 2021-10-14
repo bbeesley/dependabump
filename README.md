@@ -17,7 +17,8 @@ This is a single workflow step to perform the following tasks without lots of bo
 |----------------------------|---------------------------------------------------|----------|--------------------------------------|
 |  private-npm-token         | API token for a private npm repository            | false    |                                      |
 |  private-npm-domain        | URL for a private npm repository                  | false    |                                      |
-|  filter                    | Scope to limit dependency updates by              | false    |                                      |
+|  filter                     | Scope to limit dependency updates by              | false    | ''                                   |
+|  reject                    | Scope to limit dependency updates by              | false    | ''                                   |
 |  commit-message            | Commit message for dependabump commits            | true     | 'chore(deps): bump all dependencies' |
 |  base-branch               | Base branch for pull requests                     | true     | 'main'                               |
 |  dependabump-branch        | Branch to push dependency updates to              | true     | 'dependencies'                       |

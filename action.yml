@@ -11,9 +11,11 @@ inputs:
   private-npm-domain:
     description: URL for a private npm repository
     required: false
+    default: ''
   filter:
     description: Scope to limit dependency updates by
     required: false
+    default: ''
   reject:
     description: Exclude packages matching the given string, wildcard, glob, comma-or-space-delimited list or /regex/
     required: false
