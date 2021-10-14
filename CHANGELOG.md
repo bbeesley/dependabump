@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/atlantis-devs/dependabump/compare/v1.3.2...v1.4.0) (2021-10-14)
+
+
+### Features
+
+* allow an exclusion list of packages to be defined as an input ([77dd9ea](https://github.com/atlantis-devs/dependabump/commit/77dd9ea1696e6f318ca2fd96033994b6893f92ea))
+
 ## [1.3.2](https://github.com/atlantis-devs/dependabump/compare/v1.3.1...v1.3.2) (2021-10-14)
 
 
