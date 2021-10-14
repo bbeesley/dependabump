@@ -14,9 +14,11 @@ inputs:
   filter:
     description: Scope to limit dependency updates by
     required: false
+    default: ''
   reject:
-    description: Exclude packages matching the given string, wildcard, glob, comma-or-space-delimited list or /regex/
+    description: Scope to reject dependency updates by
     required: false
+    default: ''
   commit-message:
     description: Commit message for dependabump commits
     required: true
