@@ -2,7 +2,6 @@
   "name": "@atlantis-devs/dependabump",
   "version": "0.0.0",
   "description": "Github Action to automatically bump dependencies",
-  "type": "module",
   "scripts": {
     "test": "echo 'No tests yet'",
     "dependabump": "ncu -u && rm -rf package-lock.json node_modules | true && npm i",
