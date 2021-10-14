@@ -48,5 +48,6 @@ jobs:
           yamlSchemasJson: |
             {
                 "http://json.schemastore.org/github-action": ["action.yml"],
+                "https://json.schemastore.org/dependabot-2.0": [".github/dependabot.yml"],
                 "http://json.schemastore.org/github-workflow": [".github/workflows/*.yml"]
             }
