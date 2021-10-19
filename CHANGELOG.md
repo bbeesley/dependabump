@@ -1,3 +1,10 @@
+## [1.4.9](https://github.com/atlantis-devs/dependabump/compare/v1.4.8...v1.4.9) (2021-10-19)
+
+
+### Bug Fixes
+
+* **action:** ensure filter and reject flags are correctly escaped ([347e2ec](https://github.com/atlantis-devs/dependabump/commit/347e2ecee8dc3ae070cbb77c362bcb4bb7b0080c))
+
 ## [1.4.8](https://github.com/atlantis-devs/dependabump/compare/v1.4.7...v1.4.8) (2021-10-14)
 
 ## [1.4.7](https://github.com/atlantis-devs/dependabump/compare/v1.4.6...v1.4.7) (2021-10-14)
