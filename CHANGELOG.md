@@ -1,3 +1,10 @@
+## [1.4.12](https://github.com/atlantis-devs/dependabump/compare/v1.4.11...v1.4.12) (2021-10-25)
+
+
+### Bug Fixes
+
+* do include quotes in filter strings, but only for the lerna commands ([13b5989](https://github.com/atlantis-devs/dependabump/commit/13b5989714a848fc8b9f6026c7365f1b18240221))
+
 ## [1.4.11](https://github.com/atlantis-devs/dependabump/compare/v1.4.10...v1.4.11) (2021-10-25)
 
 
