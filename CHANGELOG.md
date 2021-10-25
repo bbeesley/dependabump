@@ -1,3 +1,10 @@
+## [1.4.11](https://github.com/atlantis-devs/dependabump/compare/v1.4.10...v1.4.11) (2021-10-25)
+
+
+### Bug Fixes
+
+* ensure minor bumps actually are only minor bumps ([4ba3a57](https://github.com/atlantis-devs/dependabump/commit/4ba3a57482bb12fc14dff3332907995d35157b5e))
+
 ## [1.4.10](https://github.com/atlantis-devs/dependabump/compare/v1.4.9...v1.4.10) (2021-10-25)
 
 
