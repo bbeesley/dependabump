@@ -72,7 +72,7 @@ runs:
         fi
         npx npm-check-updates -u --target minor --filter '${{ inputs.filter }}' --reject '${{ inputs.reject }}'
         if [ -e lerna.json ]; then
-          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --target minor --filter '${{ inputs.filter }}' --reject '${{ inputs.reject }}'
+          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --target minor --filter "'${{ inputs.filter }}'" --reject "'${{ inputs.reject }}'"
         fi
       shell: bash
     - name: minor - update package locks
@@ -117,7 +117,7 @@ runs:
         fi
         npx npm-check-updates -u --filter '${{ inputs.filter }}' --reject '${{ inputs.reject }}'
         if [ -e lerna.json ]; then
-          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --filter '${{ inputs.filter }}' --reject '${{ inputs.reject }}'
+          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --filter "'${{ inputs.filter }}'" --reject "'${{ inputs.reject }}'"
         fi
       shell: bash
     - name: major - update package locks
