@@ -1,3 +1,10 @@
+## [1.4.10](https://github.com/atlantis-devs/dependabump/compare/v1.4.9...v1.4.10) (2021-10-25)
+
+
+### Bug Fixes
+
+* don't include double quotes in filter strings ([b242e4d](https://github.com/atlantis-devs/dependabump/commit/b242e4daba1adba817cb3c10e1135b3bb659a618))
+
 ## [1.4.9](https://github.com/atlantis-devs/dependabump/compare/v1.4.8...v1.4.9) (2021-10-19)
 
 
