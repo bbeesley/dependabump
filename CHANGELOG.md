@@ -1,3 +1,5 @@
+## [1.4.14](https://github.com/atlantis-devs/dependabump/compare/v1.4.13...v1.4.14) (2021-11-01)
+
 ## [1.4.13](https://github.com/atlantis-devs/dependabump/compare/v1.4.12...v1.4.13) (2021-11-01)
 
 ## [1.4.12](https://github.com/atlantis-devs/dependabump/compare/v1.4.11...v1.4.12) (2021-10-25)
