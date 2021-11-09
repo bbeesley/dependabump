@@ -70,9 +70,9 @@ runs:
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
           cd "${{ inputs.working-dir }}"
         fi
-        npx npm-check-updates@11.8.5 -u --target minor --filter '${{ inputs.filter }}' --reject '${{ inputs.reject }}'
+        npx npm-check-updates -u --target minor --filter '${{ inputs.filter }}' --reject '${{ inputs.reject }}'
         if [ -e lerna.json ]; then
-          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates@11.8.5 -u --target minor --filter "'${{ inputs.filter }}'" --reject "'${{ inputs.reject }}'"
+          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --target minor --filter "'${{ inputs.filter }}'" --reject "'${{ inputs.reject }}'"
         fi
       shell: bash
     - name: minor - update package locks
@@ -115,9 +115,9 @@ runs:
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
           cd "${{ inputs.working-dir }}"
         fi
-        npx npm-check-updates@11.8.5 -u --filter '${{ inputs.filter }}' --reject '${{ inputs.reject }}'
+        npx npm-check-updates -u --filter '${{ inputs.filter }}' --reject '${{ inputs.reject }}'
         if [ -e lerna.json ]; then
-          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates@11.8.5 -u --filter "'${{ inputs.filter }}'" --reject "'${{ inputs.reject }}'"
+          npx lerna exec --concurrency=1 --stream=true -- npx npm-check-updates -u --filter "'${{ inputs.filter }}'" --reject "'${{ inputs.reject }}'"
         fi
       shell: bash
     - name: major - update package locks
