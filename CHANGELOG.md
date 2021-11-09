@@ -1,3 +1,10 @@
+## [1.4.17](https://github.com/atlantis-devs/dependabump/compare/v1.4.16...v1.4.17) (2021-11-09)
+
+
+### Bug Fixes
+
+* pin npx npm-check-updates to v11.8.5 to avoid breaking change until fix ([dd5c1c9](https://github.com/atlantis-devs/dependabump/commit/dd5c1c9f5b501107ebc02c2fe0141438501497fd))
+
 ## [1.4.16](https://github.com/atlantis-devs/dependabump/compare/v1.4.15...v1.4.16) (2021-11-01)
 
 ## [1.4.15](https://github.com/atlantis-devs/dependabump/compare/v1.4.14...v1.4.15) (2021-11-01)
