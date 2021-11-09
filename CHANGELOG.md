@@ -1,3 +1,10 @@
+## [1.4.18](https://github.com/atlantis-devs/dependabump/compare/v1.4.17...v1.4.18) (2021-11-09)
+
+
+### Reverts
+
+* Revert "fix: pin npx npm-check-updates to v11.8.5 to avoid breaking change until fix" ([97d1d86](https://github.com/atlantis-devs/dependabump/commit/97d1d8619ff30f8f6518524930b16d329dee7ead))
+
 ## [1.4.17](https://github.com/atlantis-devs/dependabump/compare/v1.4.16...v1.4.17) (2021-11-09)
 
 
