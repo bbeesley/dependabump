@@ -15,6 +15,7 @@ This is a single workflow step to perform the following tasks without lots of bo
 
 | name                       | description                                       | required | default                              |
 |----------------------------|---------------------------------------------------|----------|--------------------------------------|
+|  npm-bin                   | full path to the npm binary to install with       | false    | npm                                  |
 |  private-npm-token         | API token for a private npm repository            | false    |                                      |
 |  private-npm-domain        | URL for a private npm repository                  | false    |                                      |
 |  filter                     | Scope to limit dependency updates by              | false    | ''                                   |

@@ -5,6 +5,10 @@ branding:
   icon: box
   color: purple
 inputs:
+  npm-bin:
+    description: Full path to the npm binary to use while installing deps
+    required: true
+    default: npm
   private-npm-token:
     description: API token for a private npm repository
     required: false
@@ -84,7 +88,7 @@ runs:
         npm i
         if [ -e lerna.json ]; then
           npx lerna clean -y
-          npx lerna bootstrap --no-ci
+          npx lerna exec -- ${{ inputs.npm-bin }} install
         fi
       shell: bash
     - name: minor - add, commit, push, pr
@@ -133,7 +137,7 @@ runs:
           npm i
           if [ -e lerna.json ]; then
             npx lerna clean -y
-            npx lerna bootstrap --no-ci
+            npx lerna exec -- ${{ inputs.npm-bin }} install
           fi
         fi
       shell: bash
