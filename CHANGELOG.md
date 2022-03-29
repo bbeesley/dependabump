@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/atlantis-devs/dependabump/compare/v1.4.37...v1.5.0) (2022-03-29)
+
+
+### Features
+
+* allow specifying a particular npm binary to use ([8fab713](https://github.com/atlantis-devs/dependabump/commit/8fab713a7e5c1e4edee68a3dd933454a2fc3e8c1))
+
 ## [1.4.37](https://github.com/atlantis-devs/dependabump/compare/v1.4.36...v1.4.37) (2022-03-16)
 
 ## [1.4.36](https://github.com/atlantis-devs/dependabump/compare/v1.4.35...v1.4.36) (2022-03-01)
