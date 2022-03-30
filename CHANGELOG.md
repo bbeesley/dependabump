@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/atlantis-devs/dependabump/compare/v1.5.0...v1.5.1) (2022-03-30)
+
+
+### Bug Fixes
+
+* use defined npm version everywhere ([e44ac5e](https://github.com/atlantis-devs/dependabump/commit/e44ac5e41a204a08f1aa056514f6c05351bd44a0))
+
 # [1.5.0](https://github.com/atlantis-devs/dependabump/compare/v1.4.37...v1.5.0) (2022-03-29)
 
 
