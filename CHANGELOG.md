@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/atlantis-devs/dependabump/compare/v1.5.1...v1.5.2) (2022-03-30)
+
+
+### Bug Fixes
+
+* get lerna to run npm ci instead of using lerna bootstrap ([2f935d2](https://github.com/atlantis-devs/dependabump/commit/2f935d29fe94f07dcc7440ba60fad86539135065))
+
 ## [1.5.1](https://github.com/atlantis-devs/dependabump/compare/v1.5.0...v1.5.1) (2022-03-30)
 
 
