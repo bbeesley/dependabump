@@ -64,7 +64,7 @@ runs:
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
           cd "${{ inputs.working-dir }}"
         fi
-        npm ci
+        ${{ inputs.npm-bin }} ci
         if [ -e lerna.json ]; then
           npx lerna bootstrap --ci
         fi
@@ -85,7 +85,7 @@ runs:
           cd "${{ inputs.working-dir }}"
         fi
         rm -rf node_modules || true
-        npm i
+        ${{ inputs.npm-bin }} i
         if [ -e lerna.json ]; then
           npx lerna clean -y
           npx lerna exec -- ${{ inputs.npm-bin }} install
@@ -134,7 +134,7 @@ runs:
           fi
           git stash pop
           rm -rf node_modules || true
-          npm i
+          ${{ inputs.npm-bin }} i
           if [ -e lerna.json ]; then
             npx lerna clean -y
             npx lerna exec -- ${{ inputs.npm-bin }} install
