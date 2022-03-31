@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/atlantis-devs/dependabump/compare/v1.5.2...v1.5.3) (2022-03-31)
+
+
+### Bug Fixes
+
+* clean up the workspace between running minor and major updates ([19b15f9](https://github.com/atlantis-devs/dependabump/commit/19b15f91524d820fe969969849456b00dd6af8eb))
+
 ## [1.5.2](https://github.com/atlantis-devs/dependabump/compare/v1.5.1...v1.5.2) (2022-03-30)
 
 
