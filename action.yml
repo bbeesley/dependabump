@@ -114,6 +114,17 @@ runs:
           gh pr create --title "${{ inputs.commit-message }}" --body "Automated update of minor & patch dependencies" --base "${{ inputs.base-branch }}" --head "${{ inputs.dependabump-branch }}" --label dependencies || true
         fi
       shell: bash
+    - name: clean up workspace
+      shell: bash
+      run: |
+        git reset HEAD --hard
+        git clean -f -d
+        git checkout "${{ inputs.base-branch }}"
+        if [ "${{ inputs.private-npm-token == '' }}" = 'false' ]; then
+          echo "//${{ inputs.private-npm-domain }}/:_authToken=${{ inputs.private-npm-token }}" >> .npmrc
+          cp .npmrc ~/.npmrc
+        fi
+        git branch -D "${{ inputs.dependabump-major-branch }}" || true
     - name: bump major dependencies
       run: |
         if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
@@ -127,12 +138,9 @@ runs:
     - name: major - update package locks
       run: |
         if [ -n "$(git status --porcelain | grep 'package\.json')" ]; then
-          git stash
-          git checkout "${{ inputs.base-branch }}"
           if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
             cd "${{ inputs.working-dir }}"
           fi
-          git stash pop
           rm -rf node_modules || true
           ${{ inputs.npm-bin }} i
           if [ -e lerna.json ]; then
@@ -144,7 +152,6 @@ runs:
     - name: major - add, commit, push, pr
       run: |
         if [ -n "$(git status --porcelain | grep 'package\.json')" ]; then
-
           if [ "${{ inputs.working-dir == '' }}" = 'false' ]; then
             cd "${{ inputs.working-dir }}"
           fi
