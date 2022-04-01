@@ -162,7 +162,11 @@ runs:
             for FILE in $(git status --porcelain | grep -o "\S*package\.json")
             do
               git add "$FILE"
-              git add "$(echo $FILE | sed 's|package\.|package-lock.|')" || true
+              if [ -e "$(echo $FILE | sed 's|package\.|package-lock.|')" ]; then
+                do
+                  git add "$(echo $FILE | sed 's|package\.|package-lock.|')" || true
+                done
+              fi
             done
           fi
           git config user.email "${{ inputs.commit-author }}@users.noreply.github.com"
