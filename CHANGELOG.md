@@ -1,3 +1,10 @@
+## [1.5.7](https://github.com/atlantis-devs/dependabump/compare/v1.5.6...v1.5.7) (2022-04-01)
+
+
+### Bug Fixes
+
+* pin ncu to last version which works with node < 16 ([19f041d](https://github.com/atlantis-devs/dependabump/commit/19f041d28a2bfcaacc5f812ade1b6708935a837e))
+
 ## [1.5.6](https://github.com/atlantis-devs/dependabump/compare/v1.5.5...v1.5.6) (2022-04-01)
 
 
