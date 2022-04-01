@@ -1,3 +1,10 @@
+## [1.5.5](https://github.com/atlantis-devs/dependabump/compare/v1.5.4...v1.5.5) (2022-04-01)
+
+
+### Bug Fixes
+
+* trying to add a package lock that is unchanged should not throw ([164c06a](https://github.com/atlantis-devs/dependabump/commit/164c06ac2411bf55ea2b80f5bff69789056be663))
+
 ## [1.5.4](https://github.com/atlantis-devs/dependabump/compare/v1.5.3...v1.5.4) (2022-03-31)
 
 ## [1.5.3](https://github.com/atlantis-devs/dependabump/compare/v1.5.2...v1.5.3) (2022-03-31)
