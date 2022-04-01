@@ -163,9 +163,7 @@ runs:
             do
               git add "$FILE"
               if [ -e "$(echo $FILE | sed 's|package\.|package-lock.|')" ]; then
-                do
-                  git add "$(echo $FILE | sed 's|package\.|package-lock.|')" || true
-                done
+                git add "$(echo $FILE | sed 's|package\.|package-lock.|')" || true
               fi
             done
           fi
