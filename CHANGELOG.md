@@ -1,3 +1,10 @@
+## [1.5.6](https://github.com/atlantis-devs/dependabump/compare/v1.5.5...v1.5.6) (2022-04-01)
+
+
+### Bug Fixes
+
+* syntax error ([8343eab](https://github.com/atlantis-devs/dependabump/commit/8343eab1a00dad0cb6abf54f71d54e387dd0461a))
+
 ## [1.5.5](https://github.com/atlantis-devs/dependabump/compare/v1.5.4...v1.5.5) (2022-04-01)
 
 
