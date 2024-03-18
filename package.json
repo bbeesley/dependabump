@@ -37,7 +37,7 @@
     "@semantic-release/release-notes-generator": "^12.1.0",
     "conventional-changelog-angular": "^7.0.0",
     "cz-conventional-changelog": "^3.3.0",
-    "semantic-release": "^23.0.3"
+    "semantic-release": "^23.0.5"
   },
   "release": {
     "branches": [
