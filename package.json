@@ -27,7 +27,7 @@
   "homepage": "https://github.com/atlantis-devs/dependabump#readme",
   "dependencies": {},
   "devDependencies": {
-    "@commitlint/cli": "^19.2.2",
+    "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^12.0.0",
